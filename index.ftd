@@ -1,5 +1,6 @@
 -- import: fastn-community.github.io/sitemap-header-doc/docs
--- import:  __user_name__.github.io/__repo_name__
+-- import:  fastn-community.github.io/picklist-sitemap-header
+-- import:  fastn-community.github.io/picklist-sitemap-header/components
 
 
 
@@ -8,12 +9,12 @@
 ;; This renders the default documentation
 
 -- docs.home:
-package-name: __repo_name__
-package-full-name: __user_name__.github.io/__repo_name__
-github: https://github.com/__user_name__/__repo_name__
-category: __user_name__.github.io/__repo_name__
+package-name: picklist-sitemap-header
+package-full-name: fastn-community.github.io/picklist-sitemap-header
+github: https://github.com/fastn-community/picklist-sitemap-header
+category: fastn-community.github.io/picklist-sitemap-header
 license-url: NULL
-;; license-url: https://github.com/__user_name__/__repo_name__/blob/main/LICENSE
+;; license-url: https://github.com/fastn-community/picklist-sitemap-header/blob/main/LICENSE
 
 
 
@@ -26,21 +27,6 @@ optional caption site-name:
 optional ftd.image-src site-logo:
 optional string site-url:
 
-;; =============================================================================
-;; =======================<IMPLEMENT THE HEADER HERE>===========================
-;; =============================================================================
-
--- ftd.text: Implement the **header** component here
-color: $inherited.colors.text
-background.solid: $inherited.colors.background.base
-width: fill-container
-height: fill-container
-text-align: center
-role: $inherited.types.copy-regular
-padding-vertical.px: 32
-
-;; =============================================================================
-;; ================================== END ======================================
-;; =============================================================================
+-- components.header:
 
 -- end: header
