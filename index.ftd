@@ -1,0 +1,46 @@
+-- import: fastn-community.github.io/sitemap-header-doc/docs
+-- import:  __user_name__.github.io/__repo_name__
+
+
+
+
+;; ---------------- DOCUMENTATION FOR YOUR HEADER COMPONENTS ----------------------
+;; This renders the default documentation
+
+-- docs.home:
+package-name: __repo_name__
+package-full-name: __user_name__.github.io/__repo_name__
+github: https://github.com/__user_name__/__repo_name__
+category: __user_name__.github.io/__repo_name__
+license-url: NULL
+;; license-url: https://github.com/__user_name__/__repo_name__/blob/main/LICENSE
+
+
+
+
+;; ---------------- DEFINE YOUR HEADER COMPONENTS -----------------------
+;; Implement your header components below
+
+-- component header:
+optional caption site-name:
+optional ftd.image-src site-logo:
+optional string site-url:
+
+;; =============================================================================
+;; =======================<IMPLEMENT THE HEADER HERE>===========================
+;; =============================================================================
+
+-- ftd.text: Implement the **header** component here
+color: $inherited.colors.text
+background.solid: $inherited.colors.background.base
+width: fill-container
+height: fill-container
+text-align: center
+role: $inherited.types.copy-regular
+padding-vertical.px: 32
+
+;; =============================================================================
+;; ================================== END ======================================
+;; =============================================================================
+
+-- end: header

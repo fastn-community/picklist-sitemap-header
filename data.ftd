@@ -1,0 +1,7 @@
+-- import: fastn/processors as pr
+
+-- pr.sitemap-data sitemap:
+$processor$: pr.sitemap
+
+-- pr.sitemap-data full-sitemap:
+$processor$: pr.full-sitemap
