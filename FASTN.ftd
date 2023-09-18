@@ -1,11 +1,11 @@
 -- import: fastn
 
--- fastn.package: __user_name__.github.io/__repo_name__
-favicon: /-/__user_name__.github.io/__repo_name__/favicon.ico
+-- fastn.package: fastn-community.github.io/picklist-sitemap-header
+favicon: /-/fastn-community.github.io/picklist-sitemap-header/favicon.ico
 
 -- fastn.dependency: fastn-community.github.io/sitemap-header-doc
 
--- fastn.auto-import: __user_name__.github.io/__repo_name__/assets
+-- fastn.auto-import: fastn-community.github.io/picklist-sitemap-header/assets
 
 
 -- fastn.sitemap:

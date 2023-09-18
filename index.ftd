@@ -1,5 +1,5 @@
 -- import: fastn-community.github.io/sitemap-header-doc/docs
--- import:  __user_name__.github.io/__repo_name__
+-- import:  fastn-community.github.io/picklist-sitemap-header
 
 
 
@@ -8,12 +8,12 @@
 ;; This renders the default documentation
 
 -- docs.home:
-package-name: __repo_name__
-package-full-name: __user_name__.github.io/__repo_name__
-github: https://github.com/__user_name__/__repo_name__
-category: __user_name__.github.io/__repo_name__
+package-name: picklist-sitemap-header
+package-full-name: fastn-community.github.io/picklist-sitemap-header
+github: https://github.com/fastn-community/picklist-sitemap-header
+category: fastn-community.github.io/picklist-sitemap-header
 license-url: NULL
-;; license-url: https://github.com/__user_name__/__repo_name__/blob/main/LICENSE
+;; license-url: https://github.com/fastn-community/picklist-sitemap-header/blob/main/LICENSE
 
 
 
