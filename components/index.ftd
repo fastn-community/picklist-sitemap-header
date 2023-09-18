@@ -4,7 +4,7 @@
 
 
 -- pr.sitemap-data sitemap:
-$processor$: pr.sitemap
+$processor$: pr.full-sitemap
 
 
 
@@ -19,7 +19,6 @@ string site-url: /
 optional string site-name:
 ftd.image-src menu-icon: $assets.files.static.hamburger.svg
 pr.toc-item list sections: $sitemap.sections
-pr.toc-item list sub-sections: $sitemap.subsections 
 boolean $sidebar-open: false
 
 -- ftd.column:
@@ -35,7 +34,6 @@ menu-icon: $header.menu-icon
 site-url: $header.site-url 
 site-name: $header.site-name
 sections: $header.sections
-sub-sections: $header.sub-sections
 
 -- end: ftd.mobile
 
@@ -46,7 +44,7 @@ site-logo: $header.site-logo
 site-url: $header.site-url 
 site-name: $header.site-name
 sections: $header.sections
-sub-sections: $header.sub-sections
+
 
 -- end: ftd.desktop
 
@@ -109,7 +107,7 @@ spacing.fixed.px: 32
 $loop$: $header-desktop.sections as $obj
 link: $obj.url
 is-active: $obj.is-active
-sub-sections: $header-desktop.sub-sections
+sub-sections: $obj.children
 
 -- end: ftd.row
 
@@ -282,6 +280,8 @@ boolean $mouse-in: false
 align-self: center
 
 -- ftd.row:
+align-content: center
+width: fill-container
 
 -- ftd.text: $header-item.title
 role: $inherited.types.heading-tiny
@@ -292,19 +292,18 @@ color if { header-item.mouse-in }: $inherited.colors.text-strong
 style: medium
 
 -- ftd.image:
-src: $assets.files.static.drop-down.svg
-src if { header-item.mouse-in }: $assets.files.static.drop-up.svg
+src: $assets.files.static.down.svg
+src if { header-item.mouse-in }: $assets.files.static.up.svg
 $on-click$: $ftd.set-bool($a = $header-item.mouse-in, v=true)
 $on-click-outside$: $ftd.set-bool($a = $header-item.mouse-in, v=false)
 align-self: center
-padding-top.px: 6
-padding-left.px: 4
-width.fixed.px: 14
+width.fixed.px: 20
+padding-top.px: 4
 
 -- end: ftd.row
 
 -- ftd.column:
-if: { header-item.mouse-in }
+if: { !ftd.is_empty(header-item.sub-sections) && header-item.mouse-in }
 width: fill-container
 z-index: 999
 top.px: 42
@@ -318,7 +317,6 @@ border-width.px: 1
 border-color: $inherited.colors.border
 
 -- loop-section-card: $obj.title
-if: { !ftd.is_empty(header-item.sub-sections) }
 $loop$: $header-item.sub-sections as $obj
 link: $obj.url
 is-active: $obj.is-active
@@ -357,7 +355,6 @@ border-color: $inherited.colors.border
 role: $inherited.types.heading-tiny
 color: $inherited.colors.text-strong
 white-space: nowrap
-
 
 -- end: ftd.row
 
@@ -436,14 +433,6 @@ string site-url:
 boolean $show-section: false
 optional string site-name:
 pr.toc-item list sections:
-pr.toc-item list sub-sections:
-pr.toc-item list toc:
-optional pr.toc-item current-subsection: 
-optional pr.toc-item current-section: 
-optional pr.toc-item current-page:
-integer logo-width: 120
-integer logo-height: 38
-boolean blog: false
 
 -- ftd.column: 
 width: fill-container
@@ -462,21 +451,13 @@ align-content: center
 width: fill-container
 spacing.fixed.px: 16
 
--- ftd.image:
-src: $header-mobile.menu-icon
-width.fixed.px: 24
-align-self: center
-$on-click$: $ftd.toggle($a = $header-mobile.sidebar-open) 
 
--- ftd.column:
-if: { header-mobile.site-logo != NULL } 
-height.fixed.px: 38
+-- ftd.row:
+width: fill-container
 
 -- ftd.image:
 src: $header-mobile.site-logo
 height.fixed.px: 44
-
--- end: ftd.column
 
 -- ftd.text: $header-mobile.site-name
 if: { header-mobile.site-name != NULL }
@@ -488,6 +469,15 @@ align-self: center
 -- fallback-title:
 if: { header-mobile.site-logo == NULL }
 site-name: $header-mobile.site-name
+
+-- end: ftd.row
+
+-- ftd.image:
+src: $header-mobile.menu-icon
+width.fixed.px: 24
+align-self: center
+$on-click$: $ftd.toggle($a = $header-mobile.sidebar-open) 
+
 -- end: ftd.row
 
 -- end: ftd.row
@@ -496,136 +486,17 @@ site-name: $header-mobile.site-name
 width: fill-container
 background.solid: $inherited.colors.background.step-1
 
--- ftd.row:
-width: fill-container
-
--- ftd.row:
-align-self: start
-
--- ftd.text: $header-mobile.current-section.title
-if: { header-mobile.current-section != NULL }
-role: $inherited.types.label-small
-color: $inherited.colors.cta-tertiary.text
-link: $header-mobile.current-section.url
-background.solid: $inherited.colors.cta-tertiary.base
-padding-vertical.px: 8
-padding-horizontal.px: 8
-width: fill-container
-white-space: nowrap
-
--- end: ftd.row
-
--- ftd.row:
-width: fill-container
-spacing.fixed.px: 8
-padding-top.px: 8
-overflow-x: auto
-
--- header-item-mobile-view: $obj.title
-$loop$: $header-mobile.sub-sections as $obj
-children: $obj.children 
-is-active: $obj.is-active 
-link: $obj.url
-
--- end: ftd.row
-
--- end: ftd.row
-
--- ftd.row:
-if: { !ftd.is_empty($header-mobile.toc) }
-width: fill-container
-background.solid: $inherited.colors.background.step-2
-padding-horizontal.px: 20
-$on-click$: $ftd.toggle($a = $header-mobile.show-section, v=true)
-
--- ftd.row:
-width: fill-container
-padding-vertical.px: 16
-spacing.fixed.px: 4
-
--- ftd.text: $header-mobile.current-subsection.title
-if: { header-mobile.current-subsection != NULL }
-role: $inherited.types.label-small
-color: $inherited.colors.text-strong
-white-space: nowrap
-
--- ftd.text: Menu
-if: { header-mobile.current-subsection == NULL && header-mobile.current-page == NULL }
-role: $inherited.types.label-small
-color: $inherited.colors.text-strong
-white-space: nowrap
-
--- ftd.row:
-if: { header-mobile.current-subsection != NULL }
-
--- ftd.row:
-if: { header-mobile.current-page != NULL }
-
--- ftd.text: ->
-role: $inherited.types.label-small
-color: $inherited.colors.text-strong
-white-space: nowrap
-
--- end: ftd.row
-
--- end: ftd.row
-
--- ftd.text: $header-mobile.current-page.title 
-if:  { header-mobile.current-page != NULL }
-role: $inherited.types.label-small
-color: $inherited.colors.text-strong
-white-space: nowrap
-
--- end: ftd.row
-
--- ftd.row:
-align-self: end
-height: fill-container
-
--- ftd.row:
-align-self: center
-width: fill-container
-
--- ftd.image: 
-if: { !header-mobile.show-section }
-src: $assets.files.static.down-arrow-dark.svg
-height: hug-content
-width.fixed.px: 12
-
--- ftd.image: 
-if: { header-mobile.show-section }
-src: $assets.files.static.up-arrow-dark.svg
-width.fixed.px: 12
-
--- end: ftd.row
-
--- end: ftd.row
-
 -- ftd.column: 
-if: { header-mobile.show-section }
+if: { header-mobile.sidebar-open }
 width: fill-container
-anchor: parent
 background.solid: $inherited.colors.background.step-2
-top.px: 48
-left.px: 0
-z-index: 999
-max-height.fixed.px: 300
-overflow-y: auto
-
--- ftd.column:
-width: fill-container
-spacing.fixed.px: 8
-padding-vertical.px: 12
-padding-horizontal.px: 24
-overflow-x: auto
 
 -- header-toc-item-mobile-view: $obj.title
-$loop$: $header-mobile.toc as $obj
+$loop$: $header-mobile.sections as $obj
 children: $obj.children 
 is-active: $obj.is-active
 link: $obj.url
 
--- end: ftd.column
 
 -- end: ftd.column
 
@@ -648,13 +519,14 @@ link: $obj.url
 caption title:
 optional string link:
 pr.toc-item list children: 
-optional ftd.image-src icon:
 boolean is-active: 
 boolean $open: false
 
 -- ftd.column: 
 $on-click$: $ftd.toggle($a = $header-toc-item-mobile-view.open)
 $on-click-outside$: $ftd.set-bool($a = $header-toc-item-mobile-view.open, v = false)
+
+-- ftd.row:
 
 -- ftd.text: $header-toc-item-mobile-view.title
 link if { header-toc-item-mobile-view.link != NULL }: $header-toc-item-mobile-view.link
@@ -664,9 +536,27 @@ padding-left.px: 10
 color: $inherited.colors.text
 color if { header-toc-item-mobile-view.is-active }: $inherited.colors.cta-primary.base 
 
+-- ftd.image:
+src: $assets.files.static.down.svg
+src if { header-toc-item-mobile-view.open }: $assets.files.static.up.svg
+$on-click$: $ftd.toggle($a = $header-toc-item-mobile-view.open)
+align-self: center
+width.fixed.px: 20
+padding-top.px: 4
+
+-- end: ftd.row
+
+-- ftd.column:
+if: { !ftd.is_empty(header-toc-item-mobile-view.children)  }
+background.solid: $inherited.colors.background.step-2
+
+-- ftd.boolean: $header-toc-item-mobile-view.open
+color: white
+
 -- show-children-mobile:
-if: { !ftd.is_empty(header-toc-item-mobile-view.children) }
 children: $header-toc-item-mobile-view.children
+
+-- end: ftd.column
 
 -- end: ftd.column
 
