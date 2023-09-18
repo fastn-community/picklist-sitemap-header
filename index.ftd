@@ -1,5 +1,6 @@
 -- import: fastn-community.github.io/sitemap-header-doc/docs
 -- import:  fastn-community.github.io/picklist-sitemap-header
+-- import:  fastn-community.github.io/picklist-sitemap-header/components
 
 
 
@@ -26,21 +27,6 @@ optional caption site-name:
 optional ftd.image-src site-logo:
 optional string site-url:
 
-;; =============================================================================
-;; =======================<IMPLEMENT THE HEADER HERE>===========================
-;; =============================================================================
-
--- ftd.text: Implement the **header** component here
-color: $inherited.colors.text
-background.solid: $inherited.colors.background.base
-width: fill-container
-height: fill-container
-text-align: center
-role: $inherited.types.copy-regular
-padding-vertical.px: 32
-
-;; =============================================================================
-;; ================================== END ======================================
-;; =============================================================================
+-- components.header:
 
 -- end: header
