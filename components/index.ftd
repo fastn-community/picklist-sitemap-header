@@ -285,7 +285,7 @@ width: fill-container
 
 -- ftd.text: $header-item.title
 role: $inherited.types.heading-tiny
-link if { header-item.link != NULL}: $header-item.link
+link if { header-item.link != NULL }: $header-item.link
 white-space: nowrap
 color: $inherited.colors.text
 color if { header-item.mouse-in }: $inherited.colors.text-strong
@@ -294,7 +294,7 @@ style: medium
 -- ftd.image:
 src: $assets.files.static.down.svg
 src if { header-item.mouse-in }: $assets.files.static.up.svg
-$on-click$: $ftd.set-bool($a = $header-item.mouse-in, v=true)
+$on-click$: $ftd.toggle($a = $header-item.mouse-in)
 $on-click-outside$: $ftd.set-bool($a = $header-item.mouse-in, v=false)
 align-self: center
 width.fixed.px: 20
@@ -451,7 +451,6 @@ align-content: center
 width: fill-container
 spacing.fixed.px: 16
 
-
 -- ftd.row:
 width: fill-container
 
@@ -522,9 +521,7 @@ pr.toc-item list children:
 boolean is-active: 
 boolean $open: false
 
--- ftd.column: 
-$on-click$: $ftd.toggle($a = $header-toc-item-mobile-view.open)
-$on-click-outside$: $ftd.set-bool($a = $header-toc-item-mobile-view.open, v = false)
+-- ftd.column:
 
 -- ftd.row:
 
